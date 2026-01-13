@@ -7,6 +7,7 @@ import Exam5 from "./components/Exam5";
 import TodoList from "./components/TodoList";
 import Exam6 from "./components/Exam6";
 import Exam7 from "./components/Exam7";
+import TodoListPractice from "./components/TodoListPractice";
 
 function App() {
   // 상태 (state)
@@ -28,8 +29,9 @@ function App() {
       */}
       {/* <Exam5 /> */}
       {/* <TodoList /> */}
+      <TodoListPractice />
       {/* <Exam6 /> */}
-      <Exam7 />
+      {/* <Exam7 /> */}
     </>
   );
 }
