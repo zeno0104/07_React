@@ -4,23 +4,52 @@ import Restore from "./Restore.jsx";
 import Manager from "./Manager.jsx";
 import Statistics from "./Statistics.jsx";
 import { AuthContext } from "./AuthContext.jsx";
+import { NavLink, Route, Routes, useNavigate } from "react-router-dom";
+import Chart from "./Chart.jsx";
+import logo from "../assets/logo.jpg";
 
+// react-router-dom : React 애플리케이션에서 라우팅을 구현하기 위해 사용하는 라이브러리(설치필요)
+// 라우팅(Routing) : 사용자가 요청한 URL 경로에 따라 적절한 페이지나 자원을 제공하는 과정
 export default function DashBoard() {
   const { handleLogout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const goDashBoardMain = () => {
+    // "/" 이동
+    // location.href = "/";
+    // -> React에서 사용은 가능, but 권장하지 않는 방법
+    // 이 방법은 브라우저의 기본 동작을 이용해서 "새로고침하며 이동"하는 방식
+    // 즉, 전체 페이지를 리렌더링함 (React의 SPA 철학을 위배하는 경우임)
+
+    navigate("/");
+  };
   return (
     <div className="dash-board-container">
-      <h1>관리자 페이지</h1>
-
+      <div className="dash-board-header">
+        <button id="logo-btn" onClick={goDashBoardMain}>
+          <img src={logo} alt="로고" />
+        </button>
+      </div>
       <div className="admin-info">
         <p>현재 접속 관리자 : </p>
         <button onClick={handleLogout}>로그아웃</button>
       </div>
-
-      <ul className="tab-box">
-        <li className="active">복구</li>
-        <li>통계</li>
-        <li>관리자 메뉴</li>
-      </ul>
+      {/* NavLink : 현재 URL이 to 속성과 일치하면 active 상태로 인식
+      해당 컴포넌트를 클릭하면 to="경로" 작성된 경로로 이동
+      즉, 클래스에 active을 추가해줌
+      */}
+      <div className="router-tab-box">
+        <NavLink to="/">복구</NavLink>
+        <NavLink to="/statistics">통계</NavLink>
+        <NavLink to="/manager">관리자 메뉴</NavLink>
+      </div>
+      {/* Route를 이용하여 각 URL에 맞는 컴포넌트를 연결 */}
+      <Routes>
+        <Route path="/" element={<Chart />}></Route>
+        <Route path="/statistics" element={<Statistics />}></Route>
+        <Route path="/restore" element={<Restore />}></Route>
+        <Route path="/manager" element={<Manager />}></Route>
+      </Routes>
     </div>
   );
 }
