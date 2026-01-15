@@ -45,7 +45,8 @@ export default function DashBoard() {
       </div>
       {/* Route를 이용하여 각 URL에 맞는 컴포넌트를 연결 */}
       <Routes>
-        <Route path="/" element={<Chart />}></Route>
+        {/* <Route path="/" element={<Chart />}></Route> */}
+        <Route path="/" element={<Restore />}></Route>
         <Route path="/statistics" element={<Statistics />}></Route>
         <Route path="/restore" element={<Restore />}></Route>
         <Route path="/manager" element={<Manager />}></Route>
